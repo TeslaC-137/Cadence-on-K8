@@ -1,3 +1,6 @@
+####### NEED TO BE EDITED; THIS IS THE README FROM BANZAI CLOUD#######
+
+
 # Cadence
 
 [Cadence](https://cadenceworkflow.io/)  is a distributed, scalable, durable, and highly available orchestration engine to execute asynchronous long-running business logic in a scalable and resilient way.
