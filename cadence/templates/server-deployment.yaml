@@ -45,7 +45,8 @@ spec:
           value: "{{ .Values.server.history.numHistoryShards }}"
         - name: BIND_ON_LOCALHOST
           value: "{{ .Values.server.bindOnLocalHost }}"
-
+        - name: SERVICES
+          value: "frontend"
 
         ports:
         - name: frontend
