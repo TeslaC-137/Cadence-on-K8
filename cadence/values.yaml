@@ -92,9 +92,10 @@ server:
 
   affinity: {}
 
-  annotations: {}
+  annotations:
     # Annotation to enable Prometheus scrape functionality.
-    # prometheus.io/scrape: 'true'
+    prometheus.io/scrape: 'true'
+    prometheus.io/path: '/metrics'
 
 web:
   enabled: true
