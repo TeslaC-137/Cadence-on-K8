@@ -1,0 +1,25 @@
+{{- if .Values.server.frontend.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "cadence.fullname" . }}-cad-prom-frontend
+  labels:
+    app.kubernetes.io/name: {{ include "cadence.name" . }}
+    helm.sh/chart: {{ include "cadence.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{ .Values.server.frontend.prometheus.port }}
+      targetPort: {{ .Values.server.frontend.prometheus.port }}
+      protocol: TCP
+      name: cad-prom-frontend
+    - port:  {{ .Values.server.history.prometheus.port }}
+      targetPort: {{ .Values.server.history.prometheus.port }}
+      protocol: TCP
+      name: cad-prom-history
+  selector:
+    app.kubernetes.io/name: {{ include "cadence.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
