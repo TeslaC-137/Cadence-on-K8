@@ -105,10 +105,10 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "cadence.fullname" . }}-frontend
+  name: {{ include "cadence.fullname" . }}-matching
   labels:
     app.kubernetes.io/name: {{ include "cadence.name" . }}
-    cadence.role: frontend
+    cadence.role: matching
     helm.sh/chart: {{ include "cadence.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
@@ -118,20 +118,20 @@ spec:
     matchLabels:
       app.kubernetes.io/name: {{ include "cadence.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
-      cadence.role: frontend
+      cadence.role: matching
   template:
     metadata:
       labels:
         app.kubernetes.io/name: {{ include "cadence.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
-        cadence.role: frontend
+        cadence.role: matching
       {{- with .Values.server.annotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
     spec:
       containers:
-      - name: {{ .Chart.Name }}-frontend
+      - name: {{ .Chart.Name }}-matching
         image: "{{ .Values.server.image.repository }}:{{ .Values.server.image.tag }}"
         imagePullPolicy: {{ .Values.server.image.pullPolicy }}
         env:
@@ -150,28 +150,28 @@ spec:
         - name: BIND_ON_LOCALHOST
           value: "{{ .Values.server.bindOnLocalHost }}"
         - name: SERVICES
-          value: "frontend"
+          value: "matching"
 
         ports:
-        - name: frontend
-          containerPort: {{ .Values.server.frontend.service.port }}
+        - name: matching
+          containerPort: {{ .Values.server.matching.service.port }}
           protocol: TCP
         - name: metrics-front
-          containerPort: {{ .Values.server.frontend.prometheus.port }}
+          containerPort: {{ .Values.server.matching.prometheus.port }}
           protocol: TCP
 
         livenessProbe:
-          {{- if .Values.server.frontend.enabled }}
+          {{- if .Values.server.matching.enabled }}
           initialDelaySeconds: 150
           tcpSocket:
-            port: {{ .Values.server.frontend.service.port }}
+            port: {{ .Values.server.matching.service.port }}
           {{- end }}
       
         readinessProbe:
-          {{- if .Values.server.frontend.enabled }}
+          {{- if .Values.server.matching.enabled }}
           initialDelaySeconds: 50
           tcpSocket:
-            port: {{ .Values.server.frontend.service.port }}
+            port: {{ .Values.server.matching.service.port }}
           {{- end }}
           
         volumeMounts:
