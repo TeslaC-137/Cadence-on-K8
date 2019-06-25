@@ -6,7 +6,7 @@ server:
   replicaCount: 1
 
   image:
-    repository: ubercadence/server
+    repository: ubercadence/sudarshan
     tag: 0.5.8
     pullPolicy: IfNotPresent
 

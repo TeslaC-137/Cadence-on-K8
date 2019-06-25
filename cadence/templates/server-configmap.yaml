@@ -37,7 +37,7 @@ data:
       name: cadence
       bootstrapMode: hosts
       bootstrapHosts: ${RINGPOP_SEEDS_JSON_ARRAY}
-      maxJoinDuration: 30s
+      maxJoinDuration: 3000000000s
 
     services:
       frontend:
