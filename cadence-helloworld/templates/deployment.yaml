@@ -5,7 +5,7 @@ metadata:
   labels:
     app.name: helloworld
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app.name: helloworld
@@ -20,11 +20,11 @@ spec:
         imagePullPolicy: "IfNotPresent"
         env:
         - name: HOSTANDPORT
-          value: "127.0.0.1:7933"
+          value: {{ .Values.environmentVar.HostAndPort }}
         - name: DOMAIN
-          value: "samples-domain"
+          value: {{ .Values.environmentVar.Domain }}
         - name: SERVICE
-          value: "cadence-frontend"
+          value: {{ .Values.environmentVar.Service }}
       ports:
       - name: helloworld
         conainerPort: 8000

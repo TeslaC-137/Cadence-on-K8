@@ -1,0 +1,8 @@
+# Default values for helloworld templates
+
+replicaCount: 1
+
+environmentVar:
+  HostAndPort: "127.0.0.1:7933"
+  Domain: "samples-domain"
+  Service: "cadence-frontend"

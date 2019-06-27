@@ -4,12 +4,12 @@ metadata:
   name: helloworld-service
   labels:
     app.name: helloworld
-  spec:
-    type: ClusterIP
-    ports:
-      - port: 7933
-        targetPort: 7933
-        protocol: TCP
-        name: helloworld-port
-    selector:
-      app.name: helloworld
+spec:
+  type: ClusterIP
+  ports:
+    - port: 7933
+      targetPort: 7933
+      protocol: TCP
+      name: helloworld-port
+  selector:
+    app.name: helloworld
