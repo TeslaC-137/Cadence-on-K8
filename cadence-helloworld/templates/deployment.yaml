@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloworld-deployment
+  labels:
+    app.name: helloworld
+  spec:
+    replicas: 1
+    selecor:
+      matchLabels:
+        app.name: helloworld
+    template:
+      metadata:
+        labels:
+          app.name: helloworld
+      spec:
+        containers:
+        - name: helloworld-container
+          image: ubercadence/helloworld:0.0.1
+          imagePullPolicy: "IfNotPresent"
+        
+        ports:
+        - name: helloworld
+          conainerPort: 8000
+          protocol: TCP
+      volumes:
+      - name: "helloworld"

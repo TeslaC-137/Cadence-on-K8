@@ -1,0 +1,10 @@
+name: cadence-helloworld
+version: 0.0.1
+appVersion: 0.0.1
+description: This is a helm chart to deploy a hello world workflow to test cadence
+keywords:
+  - cadence-helloworld
+  - helloworld
+maintainers:
+  - name: Sudarshan
+  - email: spraj@uber.com 
