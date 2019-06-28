@@ -21,13 +21,19 @@ spec:
         env:
         - name: HOSTANDPORT
           value: {{ .Values.environmentVar.HostAndPort }}
-        - name: DOMAIN
+        - name: DOMAIN_NAME
           value: {{ .Values.environmentVar.Domain }}
-        - name: SERVICE
+        - name: SERVICE_NAME
           value: {{ .Values.environmentVar.Service }}
       ports:
       - name: helloworld
         conainerPort: 8000
         protocol: TCP
+      volumeMounts:
+      - name: helloworld-config
+        mountPath: /go/src/cadence-samples/config/hw-config.yaml
+        subPath: docker_template_cassandra.yaml
     volumes:
-    - name: helloworld
+    - name: helloworld-config
+      configMap:
+        name: helloworld-configmap

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: helloworld-configmap
+  labels:
+    app.name: helloworld
+  data:
+    # config for sample
+    domain: ${DOMAIN_NAME}
+    service: ${SAMPLE_NAME}
+    host: ${HOSTANDPORT}
