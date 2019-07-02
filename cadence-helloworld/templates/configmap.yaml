@@ -1,11 +1,12 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: helloworld-configmap
+  name: {{ .Release.Name }}-development
   labels:
     app.name: helloworld
-  data:
-    # config for sample
-    domain: ${DOMAIN_NAME}
-    service: ${SAMPLE_NAME}
-    host: ${HOSTANDPORT}
+data:
+  # config for sample
+  development.yaml: |- 
+    domain: {{ .Values.Development.Domain }}
+    service: {{ .Values.Development.Service }}
+    host: {{ .Values.Development.Host }}

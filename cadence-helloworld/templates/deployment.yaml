@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: helloworld-deployment
+  name: {{ .Release.Name }}-deployment
   labels:
     app.name: helloworld
 spec:
@@ -16,24 +16,16 @@ spec:
     spec:
       containers:
       - name: helloworld-container
-        image: ubercadence/helloworld:0.0.1
-        imagePullPolicy: "IfNotPresent"
-        env:
-        - name: HOSTANDPORT
-          value: {{ .Values.environmentVar.HostAndPort }}
-        - name: DOMAIN_NAME
-          value: {{ .Values.environmentVar.Domain }}
-        - name: SERVICE_NAME
-          value: {{ .Values.environmentVar.Service }}
-      ports:
-      - name: helloworld
-        conainerPort: 8000
-        protocol: TCP
-      volumeMounts:
-      - name: helloworld-config
-        mountPath: /go/src/cadence-samples/config/hw-config.yaml
-        subPath: docker_template_cassandra.yaml
-    volumes:
-    - name: helloworld-config
-      configMap:
-        name: helloworld-configmap
+        image: ubercadence/helloworld:0.0.5
+        imagePullPolicy: "IfNotPresent"        
+        ports:
+        - name: helloworld
+          containerPort: 8000
+          protocol: TCP
+        volumeMounts:
+        - name: {{ .Release.Name }}-development
+          mountPath: /go/src/cadence-samples/config
+      volumes:
+      - name: {{ .Release.Name }}-development
+        configMap:
+          name: {{ .Release.Name }}-development
